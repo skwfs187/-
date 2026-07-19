@@ -25,32 +25,51 @@ local mouse = player:GetMouse();
 local run = game:service('RunService');
 local stepped = run.Stepped;
 function Dragify(obj)
-	spawn(function()
-		local minitial;
-		local initial;
-		local isdragging;
-	    obj.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				isdragging = true;
-				minitial = input.Position;
-				initial = obj.Position;
-				local con;
-                con = stepped:Connect(function()
-        			if isdragging then
-						local delta = Vector3.new(mouse.X, mouse.Y, 0) - minitial;
-						obj.Position = UDim2.new(initial.X.Scale, initial.X.Offset + delta.X, initial.Y.Scale, initial.Y.Offset + delta.Y);
-					else
-						con:Disconnect();
-					end;
-                end);
+    spawn(function()
+        local dragging = false
+        local dragInput
+        local dragStart
+        local startPos
+
+        local function update(input)
+            local delta = input.Position - dragStart
+            local tweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+            local targetPosition = UDim2.new(
+                startPos.X.Scale, 
+                startPos.X.Offset + delta.X, 
+                startPos.Y.Scale, 
+                startPos.Y.Offset + delta.Y
+            )
+            
+            tweenService:Create(obj, tweenInfo, {Position = targetPosition}):Play()
+        end
+
+        obj.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                dragging = true
+                dragStart = input.Position
+                startPos = obj.Position
+
                 input.Changed:Connect(function()
-    			    if input.UserInputState == Enum.UserInputState.End then
-					    isdragging = false;
-				    end;
-			    end);
-		end;
-	end);
-end)
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging = false
+                    end
+                end)
+            end
+        end)
+
+        obj.InputChanged:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+                dragInput = input
+            end
+        end)
+
+        game:GetService("UserInputService").InputChanged:Connect(function(input)
+            if input == dragInput and dragging then
+                update(input)
+            end
+        end)
+    end)
 end
 
 -- Instances:
