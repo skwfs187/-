@@ -9,18 +9,6 @@ if game.PlaceId == 16452693191 then
     
     function ga()
         local args = {
-            [1] = Vector3.new(0),
-            [2] = Vector3.new(0),
-            [3] = Vector3.new(0),
-            [4] = 0,
-            [5] = "djhtelkds"
-        }
-        
-        game:GetService("ReplicatedStorage").KickBall:FireServer(unpack(args))
-        
-        wait(0.5)
-        
-        local args = {
             [1] = n
         }
         
@@ -28,18 +16,6 @@ if game.PlaceId == 16452693191 then
     end
 
     function gb()
-        local args = {
-            [1] = Vector3.new(0),
-            [2] = Vector3.new(0),
-            [3] = Vector3.new(0),
-            [4] = 0,
-            [5] = "djhtelkds"
-        }
-        
-        game:GetService("ReplicatedStorage").KickBall:FireServer(unpack(args))
-        
-        wait(0.5)
-        
         local args = {
             [1] = n
         }
@@ -96,10 +72,10 @@ if game.PlaceId == 16452693191 then
         task.wait()
     end)
 
-    window:Button("Goal A", function()
+    window:Button("Goal A (RISKY)", function()
         ga()
     end)
-    window:Button("Goal B", function()
+    window:Button("Goal B (RISKY)", function()
         ga()
     end)
 
