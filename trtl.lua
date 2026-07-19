@@ -23,6 +23,7 @@ local players = game:service('Players');
 local player = players.LocalPlayer;
 local mouse = player:GetMouse();
 local run = game:service('RunService');
+local tweenService = game:GetService("TweenService")
 local stepped = run.Stepped;
 function Dragify(obj)
     spawn(function()
