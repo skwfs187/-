@@ -1,3 +1,5 @@
+--ts lib sucks ngl
+
 local library = {}
 local windowCount = 0
 local sizes = {}
