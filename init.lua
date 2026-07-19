@@ -2,7 +2,7 @@ local usr = "skwfs187"
 local rep = "-"
 local br = "main"
 
-local url = string.format("https://raw.githubusercontent.com/%s/%s/%s/Scripts/", usr, rep, br
+local url = string.format("https://raw.githubusercontent.com/%s/%s/%s/Scripts/", usr, rep, br)
 local currentPlaceId = tostring(game.PlaceId)
 local targetScriptUrl = url .. currentPlaceId .. ".lua"
 
