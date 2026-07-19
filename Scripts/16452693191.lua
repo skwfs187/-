@@ -47,13 +47,13 @@ if game.PlaceId == 16452693191 then
         game:GetService("ReplicatedStorage").GoalEvent:FireServer(unpack(args))
     end
 
-    local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Turtle-Brand/Turtle-Lib/main/source.lua"))()
+    local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/skwfs187/-/refs/heads/main/trtl.lua"))()
     local window = library:Window("Touch Football")
     window:Button("Bring Ball", function()
         game:GetService("Workspace").FootballField.SoccerBall.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
     end)
 
-    window:Toggle("Auto Bring", true, function(bool)
+    window:Toggle("Auto Bring", false, function(bool)
         v.a = bool
         while v.a do
             game:GetService("Workspace").FootballField.SoccerBall.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
@@ -61,7 +61,7 @@ if game.PlaceId == 16452693191 then
         task.wait()
     end)
 
-    window:Toggle("Auto Freeze", true, function(bool)
+    window:Toggle("Auto Freeze", false, function(bool)
         v.f = bool
         while v.f do
             game:GetService("Workspace").FootballField.SoccerBall.Anchored = true
@@ -78,7 +78,7 @@ if game.PlaceId == 16452693191 then
         task.wait()
     end)
 
-    window:Toggle("Delete Ball (Risk)", true, function(bool)
+    window:Toggle("Delete Ball (Risk)", false, function(bool)
         v.d = bool
         while v.d do
             local args = {
@@ -96,8 +96,12 @@ if game.PlaceId == 16452693191 then
         task.wait()
     end)
 
-    
+    window:Button("Goal A", function()
+        ga()
+    end)
+    window:Button("Goal B", function()
+        ga()
+    end)
 
-
-    
+    window:Label("Turtle Hub", Color3.fromRGB(127, 143, 166))
 end
